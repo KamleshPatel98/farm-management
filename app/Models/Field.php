@@ -22,4 +22,9 @@ class Field extends Model
     {
         return $this->belongsTo(Farm::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

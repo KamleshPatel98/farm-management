@@ -28,6 +28,7 @@ class FieldSeeder extends Seeder
         }
 
         $field = Field::where('user_id', $user->id)
+            ->where('farm_id', $farm->id)
             ->where('name', 'Field 1')
             ->first();
         if ($field) {

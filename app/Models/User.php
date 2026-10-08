@@ -34,4 +34,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Farm::class);
     }
+
+    public function fields()
+    {
+        return $this->hasMany(Field::class);
+    }
 }
