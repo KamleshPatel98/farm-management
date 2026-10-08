@@ -15,15 +15,14 @@ class FarmSeeder extends Seeder
     public function run(): void
     {
         $user = User::where('email', 'admin@farm.com')->first();
-
         if (!$user) {
             return;
         }
 
-        $form = Farm::where('user_id', $user->id)
+        $farm = Farm::where('user_id', $user->id)
             ->where('name', 'Main Farm')
             ->first();
-        if ($form) {
+        if ($farm) {
             return;
         }
 

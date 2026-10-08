@@ -20,4 +20,9 @@ class Farm extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function fields()
+    {
+        return $this->hasMany(Field::class);
+    }
 }
