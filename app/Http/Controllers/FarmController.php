@@ -57,24 +57,46 @@ class FarmController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Farm $farm)
     {
-        //
+        abort_unless(
+            $farm->user_id === auth()->id(),
+            403
+        );
+
+        return Inertia::render('Farms/Edit', [
+            'farm' => $farm,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(FarmRequest $request, Farm $farm) {
+        abort_unless(
+            $farm->user_id === auth()->id(),
+            403
+        );
+
+        $farm->update($request->validated());
+
+        return to_route('farms.index')
+            ->with('success', 'Farm updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Farm $farm)
     {
-        //
+        abort_unless(
+            $farm->user_id === auth()->id(),
+            403
+        );
+
+        $farm->delete();
+
+        return to_route('farms.index')
+            ->with('success', 'Farm deleted successfully.');
     }
 }
