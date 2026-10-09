@@ -9,7 +9,7 @@ export default function AuthenticatedLayout({ header, children }) {
     const menuItems = [
         { name: 'Dashboard', href: route('dashboard'), icon: '📊' },
         { name: 'Farms', href: route('farms.index'), icon: '🌾' },
-        { name: 'Fields', href: '#', icon: '🗺️' },
+        { name: 'Fields', href: route('fields.index'), icon: '🗺️' },
         { name: 'Crops', href: '#', icon: '🌱' },
         { name: 'Labour', href: '#', icon: '👨‍🌾' },
         { name: 'Income', href: '#', icon: '💰' },
