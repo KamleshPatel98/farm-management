@@ -1,13 +1,9 @@
+import DeleteButton from '@/Components/DeleteButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
 export default function Index({ farms }) {
 
-    const deleteFarm = (id) => {
-        if (confirm('Are you sure you want to delete this farm?')) {
-            router.delete(route('farms.destroy', id));
-        }
-    };
 
     return (
         <AuthenticatedLayout
@@ -109,20 +105,12 @@ export default function Index({ farms }) {
                                                         ✏️ Edit
                                                     </Link>
 
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => deleteFarm(farm.id)}
-                                                        className="inline-flex items-center justify-center gap-1.5
-                                                                px-3.5 py-2
-                                                                bg-red-600 text-white
-                                                                text-sm font-medium
-                                                                rounded-lg
-                                                                hover:bg-red-700
-                                                                focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
-                                                                transition"
-                                                    >
-                                                        🗑️ Delete
-                                                    </button>
+                                                    <DeleteButton
+                                                        url={route('farms.destroy', farm.id)}
+                                                        title="Delete Farm?"
+                                                        text="Are you sure you want to delete this farm? This action cannot be undone."
+                                                        successText="Farm has been deleted successfully."
+                                                    />
 
                                                 </div>
 
