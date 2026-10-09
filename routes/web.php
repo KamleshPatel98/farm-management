@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CropController;
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\ProfileController;
@@ -19,6 +20,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('farms', FarmController::class)->except(['show',]);
     Route::resource('fields', FieldController::class)->except(['show']);
+    Route::resource('crops', CropController::class)->except(['show']);
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
