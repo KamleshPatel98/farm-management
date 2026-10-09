@@ -50,14 +50,14 @@ export default function Index({ crops }) {
                                 {crops.data.length > 0 ? (
                                     crops.data.map((crop, index) => (
                                         <tr key={crop.id} className="hover:bg-gray-50">
-                                            <td className="px-6 py-4">{crops.from + index}</td>
-                                            <td className="px-6 py-4 font-medium text-gray-800">{crop.name}</td>
-                                            <td className="px-6 py-4">{crop.crop_type}</td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">{crops.from + index}</td>
+                                            <td className="px-6 py-2 font-medium text-gray-800">{crop.name}</td>
+                                            <td className="px-6 py-2">{crop.crop_type}</td>
+                                            <td className="px-6 py-2">
                                                 {crop.duration_days ? `${crop.duration_days} days` : '-'}
                                             </td>
-                                            <td className="px-6 py-4">{crop.scientific_name || '-'}</td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">{crop.scientific_name || '-'}</td>
+                                            <td className="px-6 py-2">
                                                 {crop.status ? (
                                                     <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-700">
                                                         Active
@@ -68,7 +68,7 @@ export default function Index({ crops }) {
                                                     </span>
                                                 )}
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 <div className="flex justify-end gap-2">
                                                     <EditButton href={route('crops.edit', crop.id)} />
                                                     <DeleteButton

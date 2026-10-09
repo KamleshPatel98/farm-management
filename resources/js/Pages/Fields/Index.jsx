@@ -60,31 +60,31 @@ export default function Index({ fields }) {
                                             key={field.id}
                                             className="hover:bg-gray-50"
                                         >
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {fields.from + index}
                                             </td>
 
-                                            <td className="px-6 py-4 font-medium text-gray-800">
+                                            <td className="px-6 py-2 font-medium text-gray-800">
                                                 {field.name}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {field.farm?.name || '-'}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {field.area} {field.area_unit}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {field.soil_type || '-'}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {field.water_source || '-'}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {field.status ? (
                                                     <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
                                                         Active
@@ -96,7 +96,7 @@ export default function Index({ fields }) {
                                                 )}
                                             </td>
 
-                                            <td className="px-6 py-4 text-right">
+                                            <td className="px-6 py-2 text-right">
                                                 <div className="flex justify-end gap-2">
                                                     <EditButton
                                                         href={route('fields.edit', field.id)}

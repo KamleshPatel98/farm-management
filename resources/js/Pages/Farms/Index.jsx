@@ -61,23 +61,23 @@ export default function Index({ farms }) {
                                     farms.data.map((farm, index) => (
                                         <tr key={farm.id} className="hover:bg-gray-50">
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {farms.from + index}
                                             </td>
 
-                                            <td className="px-6 py-4 font-medium text-gray-800">
+                                            <td className="px-6 py-2 font-medium text-gray-800">
                                                 {farm.name}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {farm.total_area} {farm.area_unit}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {farm.location || '-'}
                                             </td>
 
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 {farm.status ? (
                                                     <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">
                                                         Active
@@ -89,7 +89,7 @@ export default function Index({ farms }) {
                                                 )}
                                             </td>
 
-                                            <td className="px-6 py-4 text-right space-x-2">
+                                            <td className="px-6 py-2 text-right space-x-2">
 
                                                 <div className="flex justify-end gap-2">
 
