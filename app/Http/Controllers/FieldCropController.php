@@ -14,14 +14,29 @@ class FieldCropController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->search;
+
         $fieldCrops = FieldCrop::where('user_id', auth()->id())
             ->with([
                 'field:id,farm_id,name,area,area_unit',
                 'field.farm:id,name',
                 'crop:id,name',
             ])
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->whereHas('crop', function ($cropQuery) use ($search) {
+                        $cropQuery->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('field', function ($fieldQuery) use ($search) {
+                        $fieldQuery->where('name', 'like', "%{$search}%")
+                            ->orWhereHas('farm', function ($farmQuery) use ($search) {
+                                $farmQuery->where('name', 'like', "%{$search}%");
+                            });
+                    });
+                });
+            })
             ->latest()
             ->paginate(10)
             ->withQueryString();

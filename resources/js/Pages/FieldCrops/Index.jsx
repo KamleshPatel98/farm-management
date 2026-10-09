@@ -3,9 +3,26 @@ import DeleteButton from '@/Components/DeleteButton';
 import EditButton from '@/Components/EditButton';
 import Pagination from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
+import { useState } from 'react';
 
-export default function Index({ fieldCrops }) {
+export default function Index({ fieldCrops, filters }) {
+    const [search, setSearch] = useState(filters?.search || '');
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        router.get(
+            route('field-crops.index'),
+            { search },
+            {
+                preserveState: true,
+                preserveScroll: true,
+                replace: true,
+            }
+        );
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -17,7 +34,7 @@ export default function Index({ fieldCrops }) {
             <Head title="Field Crops" />
 
             <div className="p-4 sm:p-6">
-                <div className="flex items-center justify-between mb-6 gap-4">
+                <div className="flex flex-wrap items-center justify-between mb-6 gap-3">
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">
                             Field Crops
@@ -28,12 +45,57 @@ export default function Index({ fieldCrops }) {
                         </p>
                     </div>
 
-                    <Link
-                        href={route('field-crops.create')}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 whitespace-nowrap"
-                    >
-                        + Add Field Crop
-                    </Link>
+                    <div className="flex flex-wrap items-center gap-2">
+                        {/* Search */}
+                        <form onSubmit={handleSearch} className="flex items-center gap-2">
+                            <input
+                                type="text"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                placeholder="Search crops..."
+                                className="w-36 sm:w-48 rounded-lg border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-green-500"
+                            />
+
+                            <button
+                                type="submit"
+                                title="Search"
+                                className="flex items-center justify-center rounded-lg bg-blue-600 px-3 py-2 text-white hover:bg-blue-700"
+                            >
+                                🔍
+                            </button>
+
+                            {search && (
+                                <button
+                                    type="button"
+                                    title="Clear search"
+                                    onClick={() => {
+                                        setSearch('');
+
+                                        router.get(
+                                            route('field-crops.index'),
+                                            {},
+                                            {
+                                                preserveState: true,
+                                                preserveScroll: true,
+                                                replace: true,
+                                            }
+                                        );
+                                    }}
+                                    className="flex items-center justify-center rounded-lg bg-gray-200 px-3 py-2 text-gray-700 hover:bg-gray-300"
+                                >
+                                    ❌
+                                </button>
+                            )}
+                        </form>
+
+                        {/* Add Field Crop */}
+                        <Link
+                            href={route('field-crops.create')}
+                            className="whitespace-nowrap rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+                        >
+                            + Add Field Crop
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="bg-white rounded-xl shadow-sm border overflow-hidden">
