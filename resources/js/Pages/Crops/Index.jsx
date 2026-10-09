@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import DeleteButton from '@/Components/DeleteButton';
 import EditButton from '@/Components/EditButton';
 import { Head, Link } from '@inertiajs/react';
+import Pagination from '@/Components/Pagination';
 
 export default function Index({ crops }) {
     return (
@@ -92,20 +93,7 @@ export default function Index({ crops }) {
                         </table>
                     </div>
 
-                    {crops.links.length > 3 && (
-                        <div className="flex flex-wrap gap-1 border-t p-4">
-                            {crops.links.map((link, index) => (
-                                <Link
-                                    key={index}
-                                    href={link.url || '#'}
-                                    className={`rounded border px-3 py-1 text-sm ${
-                                        link.active ? 'bg-green-600 text-white' : 'bg-white text-gray-700'
-                                    } ${!link.url ? 'pointer-events-none opacity-50' : ''}`}
-                                    dangerouslySetInnerHTML={{ __html: link.label }}
-                                />
-                            ))}
-                        </div>
-                    )}
+                    <Pagination links={crops.links} />
                 </div>
             </div>
         </AuthenticatedLayout>

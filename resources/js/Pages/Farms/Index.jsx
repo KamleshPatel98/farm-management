@@ -1,5 +1,6 @@
 import DeleteButton from '@/Components/DeleteButton';
 import EditButton from '@/Components/EditButton';
+import Pagination from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router } from '@inertiajs/react';
 
@@ -126,25 +127,7 @@ export default function Index({ farms }) {
 
                     </div>
 
-                    {/* Pagination */}
-                    {farms.links.length > 3 && (
-                        <div className="flex flex-wrap gap-1 p-4 border-t">
-                            {farms.links.map((link, index) => (
-                                <Link
-                                    key={index}
-                                    href={link.url || '#'}
-                                    className={`px-3 py-1 rounded border text-sm ${
-                                        link.active
-                                            ? 'bg-green-600 text-white'
-                                            : 'bg-white text-gray-700'
-                                    } ${!link.url ? 'opacity-50 pointer-events-none' : ''}`}
-                                    dangerouslySetInnerHTML={{
-                                        __html: link.label,
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    )}
+                    <Pagination links={farms.links} />
 
                 </div>
 

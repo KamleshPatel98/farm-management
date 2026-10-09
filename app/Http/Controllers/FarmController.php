@@ -16,7 +16,7 @@ class FarmController extends Controller
     {
         $farms = Farm::where('user_id', auth()->id())
             ->latest()
-            ->paginate(3)
+            ->paginate(10)
             ->withQueryString();
 
         return Inertia::render('Farms/Index', [
