@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             FarmSeeder::class,
             FieldSeeder::class,
             CropSeeder::class,
+            FieldCropSeeder::class,
         ]);
     }
 }

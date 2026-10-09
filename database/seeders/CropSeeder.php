@@ -187,9 +187,5 @@ class CropSeeder extends Seeder
                 $crop
             );
         }
-
-        $this->command->info(
-            'Crop master data seeded successfully for admin@farm.com user.'
-        );
     }
 }
