@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FieldCrop extends Model
 {
     protected $fillable = [
+        'user_id',
         'field_id',
         'crop_id',
         'season',
@@ -19,8 +20,6 @@ class FieldCrop extends Model
     protected function casts(): array
     {
         return [
-            'sowing_date' => 'date',
-            'expected_harvest_date' => 'date',
             'area' => 'decimal:2',
         ];
     }
