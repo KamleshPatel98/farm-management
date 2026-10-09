@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import SuccessToast from '@/Components/SuccessToast';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
@@ -21,6 +22,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
     return (
         <div className="min-h-screen bg-gray-100">
+            <SuccessToast />
 
             {/* Mobile Overlay */}
             {sidebarOpen && (
