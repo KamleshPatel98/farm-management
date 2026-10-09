@@ -27,10 +27,12 @@ export default function DeleteButton({
 
                     onSuccess: () => {
                         Swal.fire({
-                            title: successTitle,
-                            text: successText,
+                            toast: true,
+                            position: 'top-end',
+                            title: successText,
                             icon: 'success',
                             timer: 1500,
+                            timerProgressBar: true,
                             showConfirmButton: false,
                         });
                     },
