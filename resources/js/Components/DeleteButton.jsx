@@ -1,3 +1,4 @@
+
 import Swal from 'sweetalert2';
 import { router } from '@inertiajs/react';
 
@@ -7,10 +8,12 @@ export default function DeleteButton({
     text = 'Are you sure you want to delete this record? This action cannot be undone.',
     successTitle = 'Deleted!',
     successText = 'Record has been deleted successfully.',
-    children = '🗑️ Delete',
+    children = <i className="fa fa-trash"></i>,
     className = '',
 }) {
+
     const handleDelete = () => {
+
         Swal.fire({
             title,
             text,
@@ -20,8 +23,11 @@ export default function DeleteButton({
             cancelButtonText: 'Cancel',
             reverseButtons: true,
             focusCancel: true,
+
         }).then((result) => {
+
             if (result.isConfirmed) {
+
                 router.delete(url, {
                     preserveScroll: true,
 
@@ -37,26 +43,29 @@ export default function DeleteButton({
                         });
                     },
                 });
+
             }
+
         });
+
     };
 
     return (
         <button
             type="button"
             onClick={handleDelete}
+            title="Delete"
             className={
-                `inline-flex items-center justify-center gap-1.5
-                 px-3.5 py-2
-                 bg-red-600 text-white
-                 text-sm font-medium
-                 rounded-lg
-                 hover:bg-red-700
+                `inline-flex items-center justify-center
+                 w-8 h-8
+                 border border-red-500
+                 text-red-500
+                 rounded-md
+                 hover:bg-red-500 hover:text-white
                  focus:outline-none
-                 focus:ring-2
-                 focus:ring-red-500
-                 focus:ring-offset-2
-                 transition ` + className
+                 focus:ring-2 focus:ring-red-400
+                 transition
+                 ` + className
             }
         >
             {children}

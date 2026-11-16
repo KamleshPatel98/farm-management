@@ -12,9 +12,16 @@ class FarmController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $farms = Farm::where('user_id', auth()->id())
+            ->when($request->name != null, function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->name . '%');
+            })
+
+            ->when($request->status !== null, function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
             ->latest()
             ->paginate(10)
             ->withQueryString();
