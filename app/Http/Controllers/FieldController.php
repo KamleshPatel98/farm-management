@@ -13,16 +13,28 @@ class FieldController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $fields = Field::where('user_id', auth()->id())
             ->with('farm:id,name')
+            ->when($request->name != null, function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->name . '%');
+            })
+            ->when($request->farm_id != null, function ($query) use ($request) {
+                $query->where('farm_id', 'like', '%' . $request->farm_id . '%');
+            })
+            ->when($request->status !== null, function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
             ->latest()
             ->paginate(10)
             ->withQueryString();
 
+        $farms = Farm::select('id','name')->where('user_id', auth()->id())->get();
+
         return Inertia::render('Fields/Index', [
             'fields' => $fields,
+            'farms'  => $farms
         ]);
     }
 
