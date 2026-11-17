@@ -29,13 +29,16 @@ class FieldCropController extends Controller
                     $q->whereHas('crop', function ($cropQuery) use ($search) {
                         $cropQuery->where('name', 'like', "%{$search}%");
                     })
-                    ->orWhereHas('field', function ($fieldQuery) use ($search) {
-                        $fieldQuery->where('name', 'like', "%{$search}%")
-                            ->orWhereHas('farm', function ($farmQuery) use ($search) {
-                                $farmQuery->where('name', 'like', "%{$search}%");
-                            });
-                    });
+                        ->orWhereHas('field', function ($fieldQuery) use ($search) {
+                            $fieldQuery->where('name', 'like', "%{$search}%")
+                                ->orWhereHas('farm', function ($farmQuery) use ($search) {
+                                    $farmQuery->where('name', 'like', "%{$search}%");
+                                });
+                        });
                 });
+            })
+            ->when($request->status != null, function ($query) use ($request) {
+                $query->where('status', $request->status);
             })
             ->latest()
             ->paginate(10)
