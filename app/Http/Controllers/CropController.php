@@ -12,9 +12,16 @@ class CropController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $crops = Crop::where('user_id', auth()->id())
+        $crops = Crop::query()
+            ->when($request->name, function ($query, $name) {
+                $query->where('name', 'like', "%{$name}%");
+            })
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
+            ->where('user_id', auth()->id())
             ->latest()
             ->paginate(10)
             ->withQueryString();
