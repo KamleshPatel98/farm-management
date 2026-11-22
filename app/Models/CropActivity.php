@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class CropActivity extends Model
@@ -19,6 +20,14 @@ class CropActivity extends Model
         return [
             'date' => 'date',
         ];
+    }
+
+    protected function date(): Attribute
+    {
+        return Attribute::make(
+            // get: fn(?string $value) => $value ? date('d-m-Y', strtotime($value)) : null,
+            set: fn(?string $value) => $value ? date('Y-m-d', strtotime($value)) : null,
+        );
     }
 
     public function user()

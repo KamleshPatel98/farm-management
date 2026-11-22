@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CropActivityController;
 use App\Http\Controllers\CropController;
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\FieldController;
@@ -24,6 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('fields', FieldController::class)->except(['show']);
     Route::resource('crops', CropController::class)->except(['show']);
     Route::resource('field-crops', FieldCropController::class)->except(['show']);
+    Route::resource('crop-activities', CropActivityController::class)->except(['show']);
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
@@ -36,4 +38,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
