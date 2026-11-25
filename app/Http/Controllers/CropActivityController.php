@@ -79,15 +79,38 @@ class CropActivityController extends Controller
      */
     public function edit(CropActivity $cropActivity)
     {
-        //
+        +abort_if($cropActivity->user_id !== auth()->id(), 403);
+
+        $fieldCrops = FieldCrop::with([
+            'field:id,name,farm_id',
+            'field.farm:id,name',
+            'crop:id,name',
+        ])->get();
+
+        return Inertia::render('CropActivities/Edit', [
+            'cropActivity' => [
+                'id' => $cropActivity->id,
+                'field_crop_id' => $cropActivity->field_crop_id,
+                'name' => $cropActivity->name,
+                'date' => optional($cropActivity->date)->format('Y-m-d') ?? (string) $cropActivity->date,
+                'notes' => $cropActivity->notes,
+            ],
+            'fieldCrops' => $fieldCrops,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CropActivity $cropActivity)
+    public function update(CropActivityRequest $request, CropActivity $cropActivity)
     {
-        //
+        abort_if($cropActivity->user_id !== auth()->id(), 403);
+
+        $cropActivity->update($request->validated());
+
+        return redirect()
+            ->route('crop-activities.index')
+            ->with('success', 'Crop activity updated successfully.');
     }
 
     /**
@@ -95,6 +118,11 @@ class CropActivityController extends Controller
      */
     public function destroy(CropActivity $cropActivity)
     {
-        //
+        abort_if($cropActivity->user_id !== auth()->id(), 403);
+
+        $cropActivity->delete();
+
+        return to_route('crop-activities.index')
+            ->with('success', 'Crop Activity deleted successfully.');
     }
 }
