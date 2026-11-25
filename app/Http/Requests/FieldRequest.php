@@ -28,7 +28,7 @@ class FieldRequest extends FormRequest
                 'required',
                 'integer',
                 Rule::exists('farms', 'id')->where(
-                    fn ($query) => $query->where('user_id', auth()->id())
+                    fn($query) => $query->where('user_id', auth()->id())
                 ),
             ],
 

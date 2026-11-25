@@ -15,7 +15,7 @@ export default function AuthenticatedLayout({ header, children }) {
         { name: 'Crops', href: route('crops.index'), icon: '🌱' },
         { name: 'Field Crops', href: route('field-crops.index'), icon: '🌱' },
         { name: 'Crop Activity', href: route('crop-activities.index'), icon: '🌱' },
-        { name: 'Labour', href: '#', icon: '👨‍🌾' },
+        { name: 'Labour', href: route('labours.index'), icon: '👨‍🌾' },
         { name: 'Income', href: '#', icon: '💰' },
         { name: 'Expenses', href: '#', icon: '💸' },
         { name: 'Production', href: '#', icon: '📦' },
